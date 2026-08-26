@@ -54,7 +54,7 @@ model = AutoModelForCausalLM.from_pretrained(
 model.eval()
 
 # ============ LOAD DATASET ==============================
-indexes = pd.read_csv('../data/3-list.txt', names=['row_ids']).row_ids.values
+indexes = pd.read_csv('../data/4-list.txt', names=['row_ids']).row_ids.values
 #print(indexes)
 
 maindf = pd.read_csv("../../HODDI/dataset/HODDI_v1/HODDI/Merged_Dataset/pos.csv")
@@ -64,7 +64,7 @@ drug_lists = maindf["DrugBankID"].values
 side_effect_list = maindf["SE_above_0.9"].values
 
 data = maindf.loc[indexes]
-mask = [len(dd)==3 for dd in data.DrugBankID_sorted.values]
+mask = [len(dd)==4 for dd in data.DrugBankID_sorted.values]
 print("len=", len(data), "masked=", len(data[mask]))
 data = data[mask]
 
@@ -112,7 +112,7 @@ yes_id = yes_tokens[0]
 no_id = no_tokens[0]
 
 #=====================================================
-log_file = f"../resultlogs/logger_logits_order_three_goldofthree_againstall_{model_name.replace('/', '-')}.jsonl"
+log_file = f"../resultlogs/logger_logits_order_four_goldoffour_againstall_{model_name.replace('/', '-')}.jsonl"
 
 
 with open(log_file, "a") as f:
@@ -125,7 +125,7 @@ with open(log_file, "a") as f:
         # Get drugs
         # ----------------------------------------------------
         #print(ii, idx, dd, sde)
-        A, B, C = [
+        A, B, C, D = [
             drugid2drugname[drug_id]
             for drug_id in dd
         ]
@@ -143,7 +143,7 @@ with open(log_file, "a") as f:
             prompt = f"""You are given a combination of drugs and a candidate adverse effect.
 
     Drug combination:
-    {A}, {B}, {C}
+    {A}, {B}, {C}, {D}
 
     Candidate adverse effect:
     {candidate_ade}
@@ -228,6 +228,7 @@ with open(log_file, "a") as f:
                 "A": A,
                 "B": B,
                 "C": C,
+                "D": D,
 
                 "y": candidate_ade,
                 "ygold": ygold,
