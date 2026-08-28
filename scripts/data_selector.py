@@ -30,7 +30,7 @@ side_effect_list = maindf["SE_above_0.9"].values
 maindf["dl_len"] = [len(set(dbl)) for dbl in maindf["DrugBankID_sorted"].values]
 
 
-for ORDER in range(2,6):
+for ORDER in range(2,11):
     fp = open(f"{ORDER}-list.txt", "w")
     currdf = maindf[maindf.dl_len == ORDER].copy()
     print(f"ORDER ({ORDER}): ", len(currdf))

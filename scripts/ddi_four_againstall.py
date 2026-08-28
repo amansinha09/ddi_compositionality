@@ -54,7 +54,7 @@ model = AutoModelForCausalLM.from_pretrained(
 model.eval()
 
 # ============ LOAD DATASET ==============================
-indexes = pd.read_csv('../data/4-list.txt', names=['row_ids']).row_ids.values
+indexes = pd.read_csv('../data/4-list-unfiltered.txt', names=['row_ids']).row_ids.values
 #print(indexes)
 
 maindf = pd.read_csv("../../HODDI/dataset/HODDI_v1/HODDI/Merged_Dataset/pos.csv")
@@ -112,7 +112,7 @@ yes_id = yes_tokens[0]
 no_id = no_tokens[0]
 
 #=====================================================
-log_file = f"../resultlogs/logger_logits_order_four_goldoffour_againstall_{model_name.replace('/', '-')}.jsonl"
+log_file = f"../resultlogs/logger_logits_order_four_goldoffour_againstall_unfiltered_{model_name.replace('/', '-')}.jsonl"
 
 
 with open(log_file, "a") as f:
