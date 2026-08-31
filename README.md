@@ -18,3 +18,9 @@ To run the default code: `cd script/`
  ```
  This will run the code with model : `Qwen/Qwen2.5-7B-Instruct` over first 500 samples.
 
+# Model covered
+
+|Familty|Models|Order|Remark|
+|---|---|---|---|
+|Qwen-2.5|7B, 14B, 32B| 2,3,4| 
+|llama-3.1|8B|2,3,4|
